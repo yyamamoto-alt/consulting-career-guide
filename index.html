@@ -603,10 +603,10 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
   </div>
 
   <div class="tab-nav fi">
-    <button class="tab-btn active" onclick="showTab('gaikoku')">外資戦略 7社</button>
-    <button class="tab-btn" onclick="showTab('nikkei')">日系戦略 7社</button>
-    <button class="tab-btn" onclick="showTab('sogo')">総合系 8社</button>
-    <button class="tab-btn" onclick="showTab('emerging')">新興勢力</button>
+    <button class="tab-btn active" onclick="showTab('gaikoku',event)">外資戦略 7社</button>
+    <button class="tab-btn" onclick="showTab('nikkei',event)">日系戦略 7社</button>
+    <button class="tab-btn" onclick="showTab('sogo',event)">総合系 8社</button>
+    <button class="tab-btn" onclick="showTab('emerging',event)">新興勢力</button>
   </div>
 
   <!-- 外資戦略 -->
@@ -892,6 +892,19 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
         <div class="firm-full"><div class="firm-label">求める人材像</div><div class="firm-val">プロ経営者を志向する方。戦略・経営コンサルティング経験、金融機関やファンドでのM&A業務経験、事業会社での経営企画・財務経験者を歓迎。公認会計士/USCPA/証券アナリスト等の資格は加点。</div></div>
       </div>
     </div>
+
+    <div class="two-col fi">
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">日系戦略 社員規模比較</div>
+        <div class="chart-subtitle">人</div>
+        <div class="chart-wrap"><canvas id="chartNikkeiHeadcount"></canvas></div>
+      </div>
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">日系戦略 平均残業時間</div>
+        <div class="chart-subtitle">h/月</div>
+        <div class="chart-wrap"><canvas id="chartNikkeiOvertime"></canvas></div>
+      </div>
+    </div>
   </div>
 
   <!-- 総合系 -->
@@ -1161,6 +1174,12 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
         <div><div class="firm-label">ビジョン</div><div class="firm-val">グローバル展開（米・シンガポール等）、社内業務のAI化</div></div>
       </div>
     </div>
+
+    <div class="chart-box fi">
+      <div class="chart-title">新興コンサル 売上成長推移</div>
+      <div class="chart-subtitle">億円</div>
+      <div class="chart-wrap"><canvas id="chartEmergingGrowth"></canvas></div>
+    </div>
   </div>
 </div>
 </section>
@@ -1425,11 +1444,12 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 
 <!-- ====== SCRIPTS ====== -->
 <script>
-function showTab(t){
+function showTab(t,ev){
   document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  event.target.classList.add('active');
+  (ev||event).target.classList.add('active');
+  setTimeout(()=>window.dispatchEvent(new Event('resize')),50);
 }
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:0.08});
 document.querySelectorAll('.fi').forEach(e=>obs.observe(e));
@@ -1478,6 +1498,14 @@ new Chart(document.getElementById('chartStrategyOvertime'),{type:'bar',data:{lab
 new Chart(document.getElementById('chartSogoSalary'),{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:[C.bay,C.pwc,C.deloitte,'#0078D4',C.kpmg,'#C9B800',C.acc,C.abeam],borderRadius:2,maxBarThickness:36}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:700,ticks:{callback:v=>v+'万',font:{size:11}}}}}});
 
 new Chart(document.getElementById('chartSogoScale'),{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:[C.acc,'#0078D4',C.pwc,C.abeam,C.bay,C.deloitte,'#C9B800',C.kpmg],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v>=10000?(v/10000)+'万人':v.toLocaleString(),font:{size:11}}}}}});
+
+// --- 日系戦略 Charts ---
+new Chart(document.getElementById('chartNikkeiHeadcount'),{type:'bar',data:{labels:['フロンティア','IGPI','DI','YCP','CDI','P&E','FM'],datasets:[{data:[427,220,214,100,80,60,50],backgroundColor:[C.red,C.navy,C.navy,C.teal,C.blue,C.blue,C.teal],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+
+new Chart(document.getElementById('chartNikkeiOvertime'),{type:'bar',data:{labels:['P&E','DI','フロンティア','YCP','CDI','IGPI','FM'],datasets:[{data:[50,60,60,65,70,70,70],backgroundColor:[C.teal,C.blue,C.blue,C.navy,C.navy,C.navy,C.red],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'h',font:{size:11}}}}}});
+
+// --- 新興勢力 Chart ---
+new Chart(document.getElementById('chartEmergingGrowth'),{type:'bar',data:{labels:['ベイカレント','Dirbato','ライズ','North Sand','ビジョン'],datasets:[{label:'2020',data:[328,15,12,8,5],backgroundColor:'rgba(5,28,44,0.3)',borderRadius:2,maxBarThickness:32},{label:'2024',data:[1160,120,85,60,40],backgroundColor:C.navy,borderRadius:2,maxBarThickness:32}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
 </script>
 </body>
 </html>
