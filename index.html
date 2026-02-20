@@ -1291,24 +1291,72 @@ tr:hover td { background: rgba(37, 99, 235, 0.05); }
       </div>
     </div>
 
-    <!-- Fermi Example -->
+    <!-- Case Interview NG Behaviors -->
+    <div class="card fade-in" style="margin-top:32px">
+      <h3>⚠️ ケース面接でやりがちなNG行動</h3>
+      <div class="table-wrapper" style="margin-top:12px">
+        <table>
+          <thead><tr><th>NG行動</th><th>なぜNGか</th><th>正しい対応</th></tr></thead>
+          <tbody>
+            <tr><td>フレームワークを無理に当てはめる</td><td>問題の本質を見失い、型にはまった回答に</td><td>問題に合わせて柔軟に構造化する</td></tr>
+            <tr><td>正確な数字にこだわりすぎる</td><td>時間を浪費し、思考プロセスを示せない</td><td>オーダー（桁）が合っていれば十分</td></tr>
+            <tr><td>面接官のヒントを無視する</td><td>対話力・協調性がないと判断される</td><td>ヒントを積極的に取り入れ、軌道修正</td></tr>
+            <tr><td>沈黙が長すぎる</td><td>思考が止まっていると判断される</td><td>「整理させてください」と断り、1-2分で構造を示す</td></tr>
+            <tr><td>結論を先に言わない</td><td>結論ファーストの基本ができていない</td><td>まず仮説・結論を述べてから根拠を説明</td></tr>
+            <tr><td>実現可能性を考慮しない</td><td>「机上の空論」と評価される</td><td>コスト・期間・実行体制まで触れる</td></tr>
+            <tr><td>一方的に話し続ける</td><td>ディスカッション能力が低いと判断</td><td>適度に面接官に確認・質問をする</td></tr>
+            <tr><td>前提を確認しない</td><td>問題の定義が曖昧なまま進んでしまう</td><td>最初に前提条件を面接官と擦り合わせる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fermi Examples -->
     <div class="card fade-in" style="margin-top:32px">
       <h3>🧮 フェルミ推定 例題と解法</h3>
+
       <div class="case-card">
-        <h4>例題：「日本のコンサルタントの人数は？」</h4>
+        <h4>例題1：「日本のコンサルタントの人数は？」</h4>
         <div style="font-size:0.9rem;color:var(--text-light)">
           <p><strong>Step 1: 前提整理</strong></p>
-          <p>日本の労働力人口は約6,800万人。「コンサルタント」はコンサルティングファーム所属＋独立系を含む。</p>
-          <p style="margin-top:8px"><strong>Step 2: アプローチ</strong></p>
-          <p>需要サイド：日本企業のコンサル支出額 ÷ コンサルタント1人あたり売上 で推計</p>
+          <p>「コンサルタント」＝経営コンサルティングファーム所属のコンサルタント職</p>
+          <p style="margin-top:8px"><strong>Step 2: 主要ファームからの積み上げ</strong></p>
           <ul style="padding-left:20px;margin:8px 0">
-            <li>日本のコンサル市場規模：約2兆円（2023年実績）</li>
-            <li>コンサルタント1人あたりの年間売上：約2,500-3,000万円（大手の場合）</li>
-            <li>2兆円 ÷ 2,750万円 ≒ 約72,000人</li>
+            <li>戦略系（MBB+ATK等）：約1,600人</li>
+            <li>総合系BIG4+アクセンチュア：約41,500人 → コンサル職70% ≒ 29,000人</li>
+            <li>日系（アビーム・ベイカレント等）：約17,500人 → コンサル職75% ≒ 13,000人</li>
+            <li>IT系コンサル部門：約5,000人</li>
           </ul>
-          <p style="margin-top:8px"><strong>Step 3: クロスチェック</strong></p>
-          <p>主要ファームの合計が約64,000人（実データ）。中小コンサル・独立系を加えると70,000〜80,000人程度と整合。</p>
-          <p style="margin-top:8px"><strong>回答例</strong>：「約7万人と推計します」</p>
+          <p style="margin-top:8px"><strong>Step 3: 合算と検証</strong></p>
+          <p>1,600 + 29,000 + 13,000 + 5,000 ≒ <strong>約5万人</strong>（労働人口の0.07%、米国の約1/10で整合的）</p>
+        </div>
+      </div>
+
+      <div class="case-card" style="margin-top:16px">
+        <h4>例題2：「東京都内のコンビニの1日の売上合計は？」</h4>
+        <div style="font-size:0.9rem;color:var(--text-light)">
+          <p><strong>分解式</strong>：売上合計 ＝ 都内店舗数 × 1店舗あたり日販</p>
+          <ul style="padding-left:20px;margin:8px 0">
+            <li>全国コンビニ約56,000店 × 東京人口比11% × 密度補正1.5 ≒ 約9,200店</li>
+            <li>1日来客数：ピーク帯300人＋オフピーク280人＋深夜35人 ≒ 約600人</li>
+            <li>客単価：約700円 → 日販42万円（東京平均として55万円に調整）</li>
+          </ul>
+          <p><strong>結論</strong>：9,200店 × 55万円 ≒ <strong>約50億円/日</strong>（年間約1.8兆円、セブン国内売上5兆円の東京構成比と整合）</p>
+        </div>
+      </div>
+
+      <div class="case-card" style="margin-top:16px">
+        <h4>例題3：「2030年に日本に必要なEV充電スタンドの数は？」</h4>
+        <div style="font-size:0.9rem;color:var(--text-light)">
+          <p><strong>分解式</strong>：必要数 ＝ 2030年EV保有台数 ÷ 充電スタンド1基あたり対応台数</p>
+          <ul style="padding-left:20px;margin:8px 0">
+            <li>自動車保有台数7,800万台 × EV比率6% ≒ 470万台</li>
+            <li>急速充電器（30%）：1基あたり50台対応</li>
+            <li>普通充電器（70%）：1基あたり5台対応</li>
+            <li>加重平均：50×0.3 + 5×0.7 = 18.5台/基</li>
+          </ul>
+          <p><strong>結論</strong>：470万台 ÷ 18.5 ≒ <strong>約25万基</strong>（現状約3万基の約8倍。年間3.5万基の増設ペースが必要）</p>
+          <p style="margin-top:8px"><strong>感度分析</strong>：EV普及率3%なら約13万基、急速比率50%なら約18万基で足りる</p>
         </div>
       </div>
     </div>
@@ -1316,36 +1364,71 @@ tr:hover td { background: rgba(37, 99, 235, 0.05); }
     <!-- Model Cases -->
     <div class="card fade-in" style="margin-top:32px">
       <h3>👤 転職者モデルケース</h3>
-      <div class="card-grid-3" style="margin-top:16px">
+      <div style="margin-top:16px">
+
         <div class="case-card">
-          <h4>Case 1: メーカー営業 → アクセンチュア</h4>
+          <h4>Case 1: メーカー営業(28歳) → アクセンチュア コンサルタント</h4>
           <div style="font-size:0.9rem;color:var(--text-light)">
-            <p><strong>プロフィール</strong>：28歳、大手電機メーカー法人営業5年</p>
-            <p><strong>転職理由</strong>：顧客の経営課題に深く入り込みたい</p>
-            <p><strong>準備期間</strong>：約4ヶ月（ケース面接対策に重点）</p>
-            <p><strong>入社ランク</strong>：コンサルタント（年収650→850万円）</p>
-            <p><strong>入社後</strong>：製造業クライアントのSCM改革PJにアサイン。営業時代の業界知識が武器に。</p>
+            <p><strong>前職</strong>：大手電機メーカー法人営業5年 / MARCH経済学部卒</p>
+            <p><strong>転職理由</strong>：製品ありきではなく、顧客の本質的な課題解決に取り組みたい</p>
+            <p style="margin-top:8px"><strong>準備タイムライン（4ヶ月）</strong></p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+              <span class="skill-tag logic">月1: 業界研究・エージェント登録</span>
+              <span class="skill-tag comm">月2: 経歴書作成（5回推敲）・書籍2冊精読</span>
+              <span class="skill-tag tech">月3: 模擬面接8回・毎日フェルミ1問</span>
+              <span class="skill-tag mgmt">月4: 3社応募・面接</span>
+            </div>
+            <p><strong>選考</strong>：書類→1次ビヘイビアル(Mgr)→2次ケース(SM)→最終パートナー</p>
+            <p><strong>結果</strong>：年収650万→<strong>850万円</strong>（コンサルタント）</p>
+            <p><strong>入社後</strong>：「最初の3ヶ月はきつかったが、成長スピードは前職の比ではない。メーカー時代の業界知識が製造業クライアントのSCM改革PJで大いに活躍。」</p>
           </div>
         </div>
-        <div class="case-card">
-          <h4>Case 2: SE → デロイト</h4>
+
+        <div class="case-card" style="margin-top:16px">
+          <h4>Case 2: SE(31歳) → デロイト テクノロジーコンサルタント</h4>
           <div style="font-size:0.9rem;color:var(--text-light)">
-            <p><strong>プロフィール</strong>：31歳、SIer勤務SE6年、PM経験あり</p>
-            <p><strong>転職理由</strong>：もっと上流工程に関わりたい</p>
-            <p><strong>準備期間</strong>：約3ヶ月（ケース＋ビヘイビアル対策）</p>
-            <p><strong>入社ランク</strong>：シニアコンサルタント（年収600→1,000万円）</p>
-            <p><strong>入社後</strong>：金融クライアントの基幹システム刷新PJでテクノロジーリード。</p>
+            <p><strong>前職</strong>：中堅SIer SE7年・PM経験あり / 国立大学情報工学部卒</p>
+            <p><strong>転職理由</strong>：「なぜこのシステムが必要なのか」という上流の意思決定に関与したい</p>
+            <p style="margin-top:8px"><strong>準備タイムライン（5ヶ月）</strong></p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+              <span class="skill-tag logic">月1: 業界研究・ITコンサルとSEの違い理解</span>
+              <span class="skill-tag comm">月2: 経歴書をPJ別に再構成・TOEIC780点</span>
+              <span class="skill-tag tech">月3: DX関連ケース重点練習</span>
+              <span class="skill-tag mgmt">月4-5: 4社応募・面接・内定</span>
+            </div>
+            <p><strong>選考</strong>：書類→適性検査→1次技術+ビヘイビアル(Mgr)→2次ケース(SM)→最終パートナー</p>
+            <p><strong>結果</strong>：年収600万→<strong>1,000万円</strong>（シニアコンサルタント）</p>
+            <p><strong>入社後</strong>：「エンジニア出身だからこそ実現可能性を踏まえた提案ができる。技術がわかるコンサルは社内で重宝される。メガバンクのDXプロジェクトで即戦力に。」</p>
           </div>
         </div>
-        <div class="case-card">
-          <h4>Case 3: 銀行員 → PwC</h4>
+
+        <div class="case-card" style="margin-top:16px">
+          <h4>Case 3: 銀行員(26歳) → PwC マネジメントコンサルタント</h4>
           <div style="font-size:0.9rem;color:var(--text-light)">
-            <p><strong>プロフィール</strong>：26歳、メガバンク法人融資3年</p>
-            <p><strong>転職理由</strong>：金融知識を活かしつつ、より幅広い業務経験を積みたい</p>
-            <p><strong>準備期間</strong>：約5ヶ月（ゼロからケース面接を学習）</p>
-            <p><strong>入社ランク</strong>：シニアアソシエイト（年収500→750万円）</p>
-            <p><strong>入社後</strong>：金融規制対応PJにアサイン。融資審査の実務知識がチームに重宝される。</p>
+            <p><strong>前職</strong>：メガバンク法人営業部3年 / 旧帝大法学部卒</p>
+            <p><strong>転職理由</strong>：融資という手段に限定されず、経営課題に包括的にアプローチしたい</p>
+            <p style="margin-top:8px"><strong>準備タイムライン（3ヶ月）</strong></p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+              <span class="skill-tag logic">月1: 業界研究・ファーム比較・書籍購入</span>
+              <span class="skill-tag comm">月2: 経歴書・ケース1日2問ペース・模擬開始</span>
+              <span class="skill-tag mgmt">月3: 3社応募・面接・内定</span>
+            </div>
+            <p><strong>選考</strong>：書類→1次ビヘイビアル(Mgr)→2次ケース(Dir)→最終パートナー</p>
+            <p><strong>結果</strong>：年収500万→<strong>750万円</strong>（アソシエイト）</p>
+            <p><strong>入社後</strong>：「入社初日からPJにアサインされ、1週間目にクライアント前でプレゼン。銀行で培った財務分析スキルと『銀行の内部事情を理解している』ことが金融PJで大きなアドバンテージに。」</p>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Behavioral Interview Answer Example -->
+    <div class="card fade-in" style="margin-top:32px">
+      <h3>💬 ビヘイビアル面接 回答例（異業種からの転職者向け）</h3>
+      <div class="case-card" style="margin-top:16px">
+        <h4>Q:「なぜコンサルティング業界を志望するのですか？」（メーカー営業出身の場合）</h4>
+        <div style="font-size:0.9rem;color:var(--text-light);line-height:1.9">
+          <p>「現職では法人営業として5年間、素材メーカー向けの提案営業を担当してきました。<strong style="color:var(--text)">[S]</strong> ある取引先で生産性向上が課題となった際、私は製品提案に留まらず、生産ラインの工程分析を自主的に行い、改善提案をまとめました。<strong style="color:var(--text)">[T/A]</strong> 結果として生産コスト8%削減を実現し、「ここまでやってくれる人は初めて」と評価いただきました。<strong style="color:var(--text)">[R]</strong></p>
+          <p style="margin-top:8px">この経験を通じて、製品ではなく<strong style="color:var(--text)">「課題解決そのもの」を価値として提供するコンサルティング</strong>に強い関心を持ちました。」</p>
         </div>
       </div>
     </div>
