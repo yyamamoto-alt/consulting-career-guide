@@ -236,6 +236,24 @@ tbody td:first-child{font-weight:500;color:var(--navy)}
 .firm-val{font-size:0.92rem;line-height:1.8;margin-bottom:24px}
 .firm-val.weak{color:var(--red)}
 .firm-val.rec{color:var(--green-dark)}
+.firm-stats{display:flex;gap:0;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);margin:24px 0 32px}
+.firm-stat{flex:1;padding:20px 0;text-align:center;border-right:1px solid var(--border-light)}
+.firm-stat:last-child{border-right:none}
+.firm-stat-num{display:block;font-family:'Noto Serif JP',serif;font-size:1.3rem;font-weight:700;color:var(--navy);line-height:1.3}
+.firm-stat-label{display:block;font-size:0.7rem;color:var(--text-caption);margin-top:4px;letter-spacing:0.05em}
+.cat-summary{margin:0 0 64px;padding:40px;background:var(--bg);border:1px solid var(--border-light)}
+.cat-summary h4{font-family:'Noto Serif JP',serif;font-size:1.1rem;color:var(--navy);margin-bottom:16px}
+.cat-summary p{font-size:0.9rem;color:var(--text-sub);line-height:1.9}
+.int-quote{border-left:2px solid var(--teal);padding:16px 24px;margin:16px 0;background:rgba(2,123,142,0.03)}
+.int-quote p{font-size:0.85rem;color:var(--text-sub);line-height:1.8;font-style:italic}
+.int-quote .source{font-size:0.72rem;color:var(--text-caption);margin-top:8px;font-style:normal}
+.sel-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+.sel-step{font-size:0.75rem;padding:5px 10px;background:var(--bg-alt);border:1px solid var(--border-light)}
+.sel-arr{color:var(--text-caption);font-size:0.8rem}
+.firm-full{margin-bottom:24px}
+.firm-full .firm-val{line-height:1.9}
+.tbl-scroll{overflow-x:auto;margin:48px 0;-webkit-overflow-scrolling:touch}
+.tbl-scroll table{min-width:900px}
 
 /* ─── Comparison 3-col ─── */
 .cmp3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:48px 0}
@@ -579,133 +597,543 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 <div class="wrap">
   <div class="sec-header fi">
     <p class="sec-eyebrow">Chapter 06</p>
-    <h2>企業図鑑<br>主要ファーム詳細プロファイル</h2>
-    <p>BIG4、アクセンチュア、主要日系ファーム、新興勢力を網羅。</p>
+    <h2>企業図鑑<br>全22社 詳細プロファイル</h2>
+    <p>外資戦略・日系戦略・総合系ファームの強み・留意点をエキスパート知見に基づき網羅。</p>
     <hr class="sec-rule">
   </div>
 
   <div class="tab-nav fi">
-    <button class="tab-btn active" onclick="showTab('big4')">BIG4</button>
-    <button class="tab-btn" onclick="showTab('accenture')">Accenture</button>
-    <button class="tab-btn" onclick="showTab('japanese')">日系ファーム</button>
+    <button class="tab-btn active" onclick="showTab('gaikoku')">外資戦略 7社</button>
+    <button class="tab-btn" onclick="showTab('nikkei')">日系戦略 7社</button>
+    <button class="tab-btn" onclick="showTab('sogo')">総合系 8社</button>
     <button class="tab-btn" onclick="showTab('emerging')">新興勢力</button>
   </div>
 
-  <!-- BIG4 -->
-  <div id="tab-big4" class="tab-content active">
-    <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">Deloitte Tohmatsu Consulting</span></div>
-      <p class="firm-tagline">BIG4の絶対王者。圧倒的規模と死角なき総合力</p>
-      <div class="firm-bar" style="background:#86BC25"></div>
-      <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">戦略（Monitor Deloitte）、官公庁案件、BIG4国内最大規模</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">グループ約22,000人 / コンサル部門約5,111人 / 売上高3,907億円</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">中央省庁のMaaS実証実験・ルール作りなど「国策・社会課題」に関わる超上流案件</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">部門間の縦割りが強く、社内政治や調整コストが高い</div></div>
-      </div>
-      <div style="margin-top:16px"><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">国策や大企業の全社変革など、スケールの大きな課題に挑みたいトップレベル志向</div></div>
+  <!-- 外資戦略 -->
+  <div id="tab-gaikoku" class="tab-content active">
+    <div class="cat-summary fi">
+      <h4>外資戦略ファームの特徴</h4>
+      <p>CEOアジェンダに直結する純粋戦略案件が中心。少数精鋭で高い知的体力が求められる一方、得られる経験・ブランド・報酬は業界最高水準。MBB3社を筆頭に、各社が独自のポジションを確立している。</p>
     </div>
 
-    <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">PwC Consulting</span></div>
-      <p class="firm-tagline">戦略とITの美しき融合。グローバル連携の巧者</p>
-      <div class="firm-bar" style="background:#D04A02"></div>
-      <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">戦略（Strategy&）、ファーム間の壁が低い協調文化</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">コンサル部門約5,158人 / 売上高2,642億円</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">三井住友海上の気候変動リスク分析・TCFD対応支援</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">IT実装力はアクセンチュア等に劣り、突出した武器が弱い</div></div>
-      </div>
-      <div style="margin-top:16px"><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">部門の壁を越えてコラボレーションを楽しみたい、バランス型のハブ人材</div></div>
+    <div class="tbl-scroll fi">
+      <table>
+        <thead><tr><th>社名</th><th>社員数（日本）</th><th>残業(h/月)</th><th>強い領域</th><th>特徴キーワード</th></tr></thead>
+        <tbody>
+          <tr><td>マッキンゼー</td><td>約800名</td><td>75</td><td>全般（グローバル連携突出）</td><td>OneFirm / クロスボーダー / 出向・海外トランスファー</td></tr>
+          <tr><td>BCG</td><td>約1,200人</td><td>69</td><td>全般・公共系に比較優位</td><td>日本最大規模の戦略ファーム / 1966年東京開設</td></tr>
+          <tr><td>ベイン</td><td>約300人</td><td>71</td><td>PEファンド向けDD</td><td>少数精鋭 / 企業価値向上へのこだわり / TrueNorth</td></tr>
+          <tr><td>ATカーニー</td><td>約300人</td><td>74</td><td>消費財・オペレーション</td><td>「尖った個」重視 / 出向・副業制度 / 東京プレゼンス高</td></tr>
+          <tr><td>ローランド・ベルガー</td><td>約150人</td><td>80</td><td>自動車・製造業</td><td>唯一の欧州系 / 起業家精神 / 少数精鋭でストレッチ機会</td></tr>
+          <tr><td>ADL</td><td>約250人</td><td>116</td><td>製造業・ヘルスケア</td><td>世界初のコンサルファーム / PhD多数 / 技術×経営</td></tr>
+          <tr><td>Strategy&</td><td>約200名</td><td>&mdash;</td><td>PwC連携の戦略～実行</td><td>PwC傘下で安定 / 売上プレッシャー低い / メンバーファーム連携</td></tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">EY Strategy &amp; Consulting</span></div>
-      <p class="firm-tagline">急成長を遂げるチャレンジャー。戦略&times;実行の機動力</p>
-      <div class="firm-bar" style="background:#FFE600"></div>
-      <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">パーパス（目的）主導、近年急拡大中の成長力</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">コンサル部門約4,501人 / 推定平均年収1,393万円</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">LIXILのパーパス経営・組織風土改革。従業員の意識改革や経営理念浸透を支援</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">急拡大に伴い、中途入社組のスキル・質にムラ</div></div>
+    <div class="two-col fi">
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">外資戦略 日本国内社員数</div>
+        <div class="chart-subtitle">人</div>
+        <div class="chart-wrap"><canvas id="chartStrategyHeadcount"></canvas></div>
       </div>
-      <div style="margin-top:16px"><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">社会的意義を重視し、変化の激しい組織で裁量権を持ちたい開拓者</div></div>
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">外資戦略 月間平均残業時間</div>
+        <div class="chart-subtitle">時間/月（OpenWork推定）</div>
+        <div class="chart-wrap"><canvas id="chartStrategyOvertime"></canvas></div>
+      </div>
     </div>
 
+    <!-- McKinsey -->
     <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">KPMG Consulting</span></div>
-      <p class="firm-tagline">少数精鋭のブティック型BIG4。リスクと経営の番人</p>
-      <div class="firm-bar" style="background:#00338D"></div>
-      <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">リスクコンサル、ガバナンス、あえて規模を追わない</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">コンサル部門約2,116人 / 推定平均年収1,328万円</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">本田技研工業のグローバル・リスクマネジメント高度化</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">人員規模が小さく、大規模IT実行支援や全社変革を回しきれない</div></div>
-      </div>
-      <div style="margin-top:16px"><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">リスク・ガバナンス領域を極めたい、少数精鋭を好むプロフェッショナル</div></div>
-    </div>
-  </div>
-
-  <!-- Accenture -->
-  <div id="tab-accenture" class="tab-content">
-    <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">Accenture Japan</span></div>
-      <p class="firm-tagline">ITとデジタルの巨人にして、実行支援の最強集団</p>
-      <div class="firm-bar" style="background:#A100FF"></div>
-      <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">IT/デジタル、BPO（業務委託）、AI HUB Platform、圧倒的規模</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">従業員約25,000人（日本法人）/ 売上高7,175億円 / 10年で売上5.5倍</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">会津若松市スマートシティ構想 &mdash; デジタルを活かした地方創生の世界的成功モデル</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">組織の官僚化、大規模IT下請け案件での疲弊</div></div>
-      </div>
-      <div style="margin-top:16px"><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">最先端のIT実装を泥臭く最後までやり切りたいタフ人材</div></div>
-    </div>
-    <div class="chart-box fi">
-      <div class="chart-title">アクセンチュア日本法人の売上成長</div>
-      <div class="chart-subtitle">億円</div>
-      <div class="chart-wrap"><canvas id="chartAccenture"></canvas></div>
-    </div>
-  </div>
-
-  <!-- Japanese -->
-  <div id="tab-japanese" class="tab-content">
-    <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">BayCurrent Consulting</span></div>
-      <p class="firm-tagline">日本発メガファーム。ワンプール制が引き出す成長力</p>
+      <div class="firm-header"><span class="firm-name">マッキンゼー・アンド・カンパニー</span></div>
+      <p class="firm-tagline">グローバルNo.1戦略ファーム。真のOneFirmとして世界をリード</p>
       <div class="firm-bar" style="background:var(--navy)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約800名</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">75h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">全般</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
       <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">ワンプール制による柔軟なアサイン、日系特有の柔軟性、時価総額1兆円突破</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">コンサルタント約4,842人 / 売上高1,160億円（+23.6%）/ 平均年収1,350万円</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">ワンプールゆえに特定の業界・技術の専門性が育ちにくい</div></div>
-        <div><div class="firm-label">こんな人におすすめ</div><div class="firm-val rec">様々な案件を経験しながら早期に年収を上げたいジェネラリスト</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">グローバル連携が非常に強く、クロスボーダー案件も豊富。東京オフィスにも外国籍のパートナーが多く在籍しており、英語を使って仕事をしたい方には機会が多い。入社2-3年後に出向・海外オフィスへのトランスファー機会あり。官公庁・商社への出向や、米国をはじめとする海外オフィスでの経験が可能。プロボノ活動へのサポートも他ファーム比で強い。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">ここ5年程の採用拡大に伴い昨年は稼働率が低下、東京オフィスでも規模見直しが行われた。一方で直近は採用を再開しており、門戸が再度開いている。</div></div>
       </div>
     </div>
+
+    <!-- BCG -->
     <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">ABeam Consulting</span></div>
-      <p class="firm-tagline">日本発グローバルファーム。ERP導入と伴走支援の達人</p>
-      <div class="firm-bar" style="background:#E6002D"></div>
+      <div class="firm-header"><span class="firm-name">ボストン コンサルティング グループ</span></div>
+      <p class="firm-tagline">日本においてNo.1の規模を誇る戦略ファーム</p>
+      <div class="firm-bar" style="background:var(--blue)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約1,200人</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">69h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">全般・公共</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
       <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">SAP/ERP導入、日系企業に寄り添う「リアルパートナー」</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">連結約8,816人 / 売上高1,408億円（+15.7%）</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">花王のグローバル会計システム統一 &mdash; 世界各国の会計システムをSAPで統一</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">純粋な経営戦略案件に弱く、ERP導入以外の強みが見えにくい</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">戦略ファームの中では日本国内最大規模を誇り、ピュア戦略から実行・デジタルまで幅広いオファリングをカバー。戦略ファームの中では公共系の案件も多い。日本オフィスのプレゼンスが高く、日本企業のクライアントに貢献できる環境。東京オフィスは1966年にボストンに次ぐ2番目のオフィスとして設立。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">規模の拡大に伴い、ピュア戦略のみに携わりたい方がその機会を得られるかは入社後の評価次第。マッキンゼーやベインと比較するとドメスティックであり、英語・グローバルに活躍されたい方にはMcKやBainの方が合う可能性。</div></div>
       </div>
     </div>
+
+    <!-- Bain -->
     <div class="firm fi">
-      <div class="firm-header"><span class="firm-name">NTT DATA</span></div>
-      <p class="firm-tagline">社会インフラを創るITガリバー。圧倒的開発力で上流から実装まで</p>
-      <div class="firm-bar" style="background:#0078D4"></div>
+      <div class="firm-header"><span class="firm-name">ベイン・アンド・カンパニー</span></div>
+      <p class="firm-tagline">少数精鋭。企業価値向上にこだわる直言型コンサルティング</p>
+      <div class="firm-bar" style="background:var(--teal)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約300人</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">71h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">PE DD</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
       <div class="firm-grid">
-        <div><div class="firm-label">強い領域</div><div class="firm-val">超大規模システム構築（官公庁・金融）、国内最強のSIer</div></div>
-        <div><div class="firm-label">規模データ</div><div class="firm-val">グループ197,800人（グローバル）/ 売上高46,387億円（グループ全体）</div></div>
-        <div><div class="firm-label">代表案件</div><div class="firm-val">全銀システム &mdash; 日本の銀行間資金決済を担う究極の社会インフラ</div></div>
-        <div><div class="firm-label">留意点</div><div class="firm-val weak">典型的な日系大企業カルチャー。上流（戦略）のブランド力不足</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">企業価値の向上にこだわり、CXO層をカウンターパートとした案件にフォーカス。ピュア戦略で経験を積みたい方にはとても適した環境。ビジネスDDも社内知見が豊富で経験を積みやすい。クロスボーダー案件も多く、英語を使って仕事をしたい方におすすめ。社員のウェルビーイングを大切にする方針を打ち出し、女性活躍にも他ファームに先駆けて取り組んでいる。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">案件の進め方は標準化が進んでおり、事業戦略レイヤーのテーマで自由度高く仮説を考えたい方・部長クラスと手触り感のある仕事をしたい方にはやや不適。コンサルタントにもバランス型を求める傾向があり、強み・弱みのばらつきが多い方にはフィットしにくい。</div></div>
+      </div>
+    </div>
+
+    <!-- AT Kearney -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">A.T.カーニー</span></div>
+      <p class="firm-tagline">「尖った個」を重視。消費財・オペレーション領域の雄</p>
+      <div class="firm-bar" style="background:#D04A02"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約300人</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">74h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">消費財・Op</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">東京オフィスの代表がAPAC代表を務め、グローバル中でも東京のプレゼンス・自律性が高い。消費財、オペレーション領域に加え近年はビジネスDDにも注力。「尖った個」を重視する採用で、個人の強みを生かし・のばす育成方針。出向制度や副業制度があり、ファームにいながら大手事業会社やメガベンチャーでの経験も可能。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">案件によっては実際のランクよりストレッチしたロールを任されることも多く、チャレンジに耐えうるレジリエンスが必要。</div></div>
+      </div>
+    </div>
+
+    <!-- Roland Berger -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">ローランド・ベルガー</span></div>
+      <p class="firm-tagline">唯一の欧州系戦略ファーム。自動車・製造業に圧倒的強み</p>
+      <div class="firm-bar" style="background:#00338D"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約150人</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">80h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">製造業</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">「起業家精神」「最高の結果」「共感力・多様性」の3つをコアバリューとした企業文化。創業者ローランド・ベルガー氏もしばしば東京オフィスを訪れるなど、ドイツ側も日本を重要市場と位置付け。現時点では少数精鋭の規模感のため、案件の中でストレッチしたロールを通じて成長機会を得られる。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">案件によってはストレッチロールの負荷が高く、チャレンジ耐性が求められる。</div></div>
+      </div>
+    </div>
+
+    <!-- ADL -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">アーサー・ディ・リトル（ADL）</span></div>
+      <p class="firm-tagline">世界最初の経営コンサルファーム。技術&times;経営の二刀流</p>
+      <div class="firm-bar" style="background:#86BC25"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約250人</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">116h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">製造・HC</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">PhDを保有するコンサルタントも多く在籍し、確かなサイエンス・技術の理解に基づく製造業・ヘルスケア案件に強み。カルチャーも質実剛健、クライアントのために尽力する誠実な人材が集まっている。経産省の受託案件など公共系にも一定のプレゼンスを有する。近年は実行領域にうまく広げて売上を拡大中。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">分析の量・精緻さを強みにしているため、大量の調査を実施・スライドを作成することもあり、稼働負荷が業界最高水準（116h/月）。</div></div>
+      </div>
+    </div>
+
+    <!-- Strategy& -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">Strategy&amp;（PwCコンサルティング）</span></div>
+      <p class="firm-tagline">PwCの傘下で安定感。戦略～実行の一気通貫を実現</p>
+      <div class="firm-bar" style="background:#D04A02"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約200名</span><span class="firm-stat-label">日本国内社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">&mdash;</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">多様</span><span class="firm-stat-label">強い領域</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">エキスパート見解：強み</div><div class="firm-val">PwCと連携し戦略～実行まで一気通貫での支援が可能。PwC側での売上が安定しているため、S&として無理な案件獲得が少なく比較的稼働が安定。製造業・ヘルスケアをはじめ広範な業界に強み。PwCの一部でありながら社内でも別ブランドとしての地位を獲得しており、優秀なシニアから戦略コンサルのスキルを学べる環境。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">案件の閑散期にはPwC案件にS&の要員もアサインされることがあり、戦略ファームに入社したが結果的に実行支援ばかりに経験が偏るリスクがある。</div></div>
       </div>
     </div>
   </div>
 
-  <!-- Emerging -->
+  <!-- 日系戦略 -->
+  <div id="tab-nikkei" class="tab-content">
+    <div class="cat-summary fi">
+      <h4>日系戦略ファームの特徴</h4>
+      <p>独立系ならではの機動力とハンズオン支援が特徴。外資戦略と比較してクライアントの規模は中堅～大企業が中心だが、戦略立案から実行まで泥臭く伴走する経験が積める。将来的に経営者を目指す人材や、事業投資・M&Aに関わりたい人材に適した環境。</p>
+    </div>
+
+    <div class="tbl-scroll fi">
+      <table>
+        <thead><tr><th>社名</th><th>創業年</th><th>社員数</th><th>残業(h/月)</th><th>強み</th></tr></thead>
+        <tbody>
+          <tr><td>ドリームインキュベータ</td><td>2000年</td><td>214名</td><td>60</td><td>投資&times;コンサル「ビジネスプロデュース」型 / 東証プライム上場</td></tr>
+          <tr><td>CDI</td><td>1986年</td><td>約80名</td><td>70</td><td>日本初の独立系戦略ファーム / 「和魂洋才」/ 少数精鋭</td></tr>
+          <tr><td>YCP Solidiance</td><td>2011年</td><td>国内約100名</td><td>60-70</td><td>海外展開に強み / ファンド案件中心 / スピード経営変革</td></tr>
+          <tr><td>IGPI</td><td>2007年</td><td>約220名</td><td>70</td><td>産業再生機構の知見 / ハンズオン経営支援 / 製造業・公共</td></tr>
+          <tr><td>P&amp;Eディレクションズ</td><td>2001年</td><td>60名</td><td>50</td><td>伴走型の実行支援 / 新規事業・成長戦略 / 海外対応可</td></tr>
+          <tr><td>フィールドマネジメント</td><td>2009年</td><td>約50名</td><td>70</td><td>純粋戦略&times;クリエイティブ / BtoC・スポーツ・エンタメ</td></tr>
+          <tr><td>フロンティア・マネジメント</td><td>2007年</td><td>427名(連結)</td><td>60</td><td>戦略～M&A～再生ワンストップ / 東証上場</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DI -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">ドリームインキュベータ（DI）</span></div>
+      <p class="firm-tagline">投資&times;コンサルのビジネスプロデュース型。東証プライム上場の独立系旗手</p>
+      <div class="firm-bar" style="background:var(--navy)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">214名</span><span class="firm-stat-label">社員数(2025/3)</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">61.8億円</span><span class="firm-stat-label">売上高(2025/3)</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">60h</span><span class="firm-stat-label">平均残業/月</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">新規事業、M&A、技術活用、公共（SIB）など領域横断。インキュベーションと事業投資を組み合わせた"ビジネスプロデュース"型。テクノロジー活用と実装伴走を強みに、大企業の変革を推進する。直近は売上拡大基調（+15%）。他の日系戦略と比較するとピュア戦略の比率が高いとされる。</div></div>
+      </div>
+    </div>
+
+    <!-- CDI -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">コーポレイトディレクション（CDI）</span></div>
+      <p class="firm-tagline">1986年創業。BCG出身者が設立した日本初の独立系戦略ファーム</p>
+      <div class="firm-bar" style="background:var(--blue)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約80名</span><span class="firm-stat-label">グループ全体</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">1986年</span><span class="firm-stat-label">創業</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">70h</span><span class="firm-stat-label">平均残業/月</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">「和魂洋才」のアプローチ。トップマネジメントに深く入り込み、全社変革から新規事業、M&Aまで少数精鋭で支援。特定業界に依存せず、国内外で幅広いテーマを手がける"現実解"志向が持ち味。アジア展開と知見発信（上場中堅企業白書等）で影響力を拡大中。</div></div>
+      </div>
+    </div>
+
+    <!-- YCP -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">YCP Solidiance</span></div>
+      <p class="firm-tagline">海外展開に強み。ファンド案件でスピーディーな経営変革を伴走</p>
+      <div class="firm-bar" style="background:var(--teal)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約100名</span><span class="firm-stat-label">国内コンサル</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">60-70h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">2011年</span><span class="firm-stat-label">創業</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">MSD（経営支援）はプロジェクトの3割がDD、7割が経営支援。ファンド案件が多く（丸の内キャピタル等）、スピード感のある経営変革に伴走できる環境。海外コンサル事業を積極拡大中。若手が何でもやる自由度の高さが魅力。</div></div>
+        <div class="firm-full"><div class="firm-label">エキスパート見解：留意点</div><div class="firm-val weak">クライアントや案件の質（ピュア戦略ではなく実行系も多い）。会社として育成制度が整っていない面あり。中途（30前後）での入社は能力的にも体力的にも苦戦する傾向。</div></div>
+      </div>
+      <div class="int-quote">
+        <p>「ファンド案件が多いので、作った戦略でゴリゴリ回せて、戦略を作って実行までやれる。スピード感のある経営変革で相当良い経験が積める。」</p>
+        <div class="source">&mdash; 在職者4年目ヒアリングより</div>
+      </div>
+    </div>
+
+    <!-- IGPI -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">経営共創基盤（IGPI）</span></div>
+      <p class="firm-tagline">産業再生機構の知見を継承。ハンズオン経営支援のプロフェッショナル</p>
+      <div class="firm-bar" style="background:var(--navy)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約220名</span><span class="firm-stat-label">プロフェッショナル</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">約8,500名</span><span class="firm-stat-label">グループ全体</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">70h</span><span class="firm-stat-label">平均残業/月</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">再生&times;成長の両面で"経営に入り込む"ハンズオン型。コンサルに投資・事業経営を織り交ぜ、再生から事業承継、成長加速まで長期コミット。製造業の専門力に加え、公共・地域インフラにも強み。JPiXやみちのりHDなど事業会社群を抱える実行力。</div></div>
+        <div class="firm-full"><div class="firm-label">求める人材像</div><div class="firm-val">成果へのコミットメント、プロアクティブ・チャレンジ志向、高い人間力・チームワーク。事業会社の企画・新規事業開発やM&A関連業務、金融機関での経験者を歓迎。</div></div>
+      </div>
+    </div>
+
+    <!-- P&E -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">P&amp;Eディレクションズ</span></div>
+      <p class="firm-tagline">伴走型の実行支援。新規事業・成長戦略の独立系ブティック</p>
+      <div class="firm-bar" style="background:var(--blue)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">60名</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">50h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">2001年</span><span class="firm-stat-label">創業</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">新規事業や成長戦略、M&A/DDを"伴走型"で支援。結果にこだわる実行志向の文化を背景に、消費財からIT、ヘルスケアまで幅広く対応。シンガポール拠点もあり海外案件にも対応可能。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">M&A関連の案件が多く偏りがある。Manager以上の給与がさほど高くないため、優秀な人はMに上がるタイミングか直前に離脱する傾向。結果としてジュニアに皺寄せが発生。</div></div>
+      </div>
+    </div>
+
+    <!-- FMS -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">フィールドマネジメント</span></div>
+      <p class="firm-tagline">純粋戦略&times;クリエイティブ。BtoC・スポーツ・エンタメ領域に強み</p>
+      <div class="firm-bar" style="background:var(--teal)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約50名</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">70h</span><span class="firm-stat-label">平均残業/月</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">2009年</span><span class="firm-stat-label">創業</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">戦略特化の少数精鋭。"ゼロから構想"する純粋戦略に、グループのクリエイティブ機能（EXPAND）を連動させ実装まで踏み込む。MDがほぼ外資戦略出身者のため働き方がMBBに近い。パフォーマンスに自信がありアーリープロモーションを狙う人材向け。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">ポートフォリオに偏りがあるため、希望の業界のプロジェクトがそもそも存在しない可能性。</div></div>
+      </div>
+    </div>
+
+    <!-- Frontier Management -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">フロンティア・マネジメント</span></div>
+      <p class="firm-tagline">戦略～M&A～再生をワンストップで提供。上場ファームのガバナンス力</p>
+      <div class="firm-bar" style="background:#C23B22"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">427名</span><span class="firm-stat-label">連結社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">92.6億円</span><span class="firm-stat-label">売上高(2024/12)</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">60h</span><span class="firm-stat-label">平均残業/月</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">経営コンサル・M&Aアドバイザリー・経営執行支援・投資を一気通貫で提供。M&A助言の成功報酬比重が高い収益構造。投資子会社の拡大を進めつつ、上場ファームとしての透明性と案件遂行力が武器。グローバル（米国・中国・シンガポール・ベトナム）にも展開。</div></div>
+        <div class="firm-full"><div class="firm-label">求める人材像</div><div class="firm-val">プロ経営者を志向する方。戦略・経営コンサルティング経験、金融機関やファンドでのM&A業務経験、事業会社での経営企画・財務経験者を歓迎。公認会計士/USCPA/証券アナリスト等の資格は加点。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 総合系 -->
+  <div id="tab-sogo" class="tab-content">
+    <div class="cat-summary fi">
+      <h4>総合コンサルティングファームの特徴</h4>
+      <p>戦略から実行、IT導入まで幅広いサービスラインを持つ。BIG4は監査法人グループのネットワークを活かし、アクセンチュアはIT/デジタル実装力で圧倒。日系のベイカレントはワンプール制の柔軟性、アビームはSAP領域で存在感。未経験からの転職者も多く受け入れている。</p>
+    </div>
+
+    <div class="tbl-scroll fi">
+      <table>
+        <thead><tr><th>社名</th><th>カテゴリ</th><th>規模（人）</th><th>平均年収</th><th>平均年齢</th><th>中途比率</th><th>おすすめな人</th></tr></thead>
+        <tbody>
+          <tr><td>デロイト</td><td>BIG4</td><td>約5,500</td><td>950万</td><td>30.7歳</td><td>約60%</td><td>第二新卒、Pool制度で様々な業界を経験したい人</td></tr>
+          <tr><td>PwC</td><td>BIG4</td><td>約10,000</td><td>980万</td><td>33歳</td><td>&mdash;</td><td>若手のうちから裁量権を持ちPJに参画したい人</td></tr>
+          <tr><td>KPMG</td><td>BIG4</td><td>約2,000</td><td>910万</td><td>37.0歳</td><td>約70%</td><td>温和な雰囲気を求める人、中途採用</td></tr>
+          <tr><td>EY</td><td>BIG4</td><td>約4,000</td><td>905万</td><td>&mdash;</td><td>&mdash;</td><td>グローバル、クロスボーダーで働きたい人</td></tr>
+          <tr><td>アクセンチュア</td><td>外資</td><td>約27,000</td><td>865万</td><td>33.2歳</td><td>72%</td><td>第二新卒、テクノロジースキルを向上させたい人</td></tr>
+          <tr><td>IBM</td><td>外資</td><td>約15,000</td><td>910万</td><td>33.0歳</td><td>&mdash;</td><td>GenAI、量子コンピュータ等の先端技術に関心がある人</td></tr>
+          <tr><td>ベイカレント</td><td>日系</td><td>約5,900</td><td>1,000万</td><td>31.2歳</td><td>&mdash;</td><td>未経験から高年収を目指したい人</td></tr>
+          <tr><td>アビーム</td><td>日系</td><td>約8,800</td><td>820万</td><td>32.0歳</td><td>&mdash;</td><td>SAPスキル向上、独立やフリーコンサルを目指す人</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col fi">
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">総合系ファーム 平均年収比較</div>
+        <div class="chart-subtitle">万円</div>
+        <div class="chart-wrap"><canvas id="chartSogoSalary"></canvas></div>
+      </div>
+      <div class="chart-box" style="margin:0">
+        <div class="chart-title">総合系ファーム 規模比較</div>
+        <div class="chart-subtitle">社員数（人）</div>
+        <div class="chart-wrap"><canvas id="chartSogoScale"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Deloitte -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">デロイト トーマツ コンサルティング</span></div>
+      <p class="firm-tagline">BIG4の絶対王者。監査・税務・法務との連携で死角なき総合力</p>
+      <div class="firm-bar" style="background:#86BC25"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約5,500人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">950万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">30.7歳</span><span class="firm-stat-label">平均年齢</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">約60%</span><span class="firm-stat-label">中途比率</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">監査法人Deloitteの日系グローバルメンバーファーム。売上高トップ・国内最大級。インダストリー&times;ファンクションの配属制。DX、サプライチェーン再構築、リスクガバナンス、M&A支援など幅広い。社会課題の解決にも注力。人を長く育てる文化あり。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">業界におけるポジショニングが弱い。組織全体として目指す方向が定まっていない面。テクノロジー案件増加に伴い人材の質のボラティリティが高い。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー（20代コンサル初心者の場合）</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接（ケース）</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+        </div>
+        <div class="firm-full"><div class="firm-label">ランク別年収目安</div><div class="firm-val">アナリスト &rarr; コンサルタント(700万) &rarr; シニコン(850万) &rarr; マネージャー(1,100万)</div></div>
+      </div>
+      <div class="int-quote">
+        <p>「自動車系のインダストリーが強い。インダストリー&times;ファンクションの配属になる。」</p>
+        <div class="source">&mdash; 在籍中・31歳 ヒアリングより</div>
+      </div>
+    </div>
+
+    <!-- PwC -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">PwCコンサルティング</span></div>
+      <p class="firm-tagline">アドバイザリー事業に強み。少数精鋭で個々の裁量が大きい</p>
+      <div class="firm-bar" style="background:#D04A02"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約10,000人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">980万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">33歳</span><span class="firm-stat-label">平均年齢</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">ストラテジー、エンタープライズ、ビジネストランスフォーメーション、テクノロジー、トラストリスクの5つの領域。DX、M&A、先端技術活用、エコシステム創出など。アサイン考慮など社員へのサポートが厚く、自身のビジョンに合わせた業務が与えられる環境。売上高倍増に向けコンサルタント増員中。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">監査法人が親会社のため、良くも悪くも働き方や対応できる案件に制限がある。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">二次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPMG -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">KPMGコンサルティング</span></div>
+      <p class="firm-tagline">プロジェクト型コンサルが特徴。少数精鋭で裁量権が大きい</p>
+      <div class="firm-bar" style="background:#00338D"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約2,000人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">910万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">37.0歳</span><span class="firm-stat-label">平均年齢</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">約70%</span><span class="firm-stat-label">中途比率</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">ガバナンス、リスク、スマートシティ、ストラテジー、ビジネストランスフォーメーション、テクノロジー、リスク・コンプライアンスの領域に強み。監査・税務を含むKPMGネットワークとの連携による統合的サービス提供力。特定業界に偏らない幅広い支援実績。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">Big4内で最も給与が低め。温和な人が多い反面、意思決定のスピード感が遅い。若手層の教育体制が整っていない。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">オンラインケース</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">二次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EY -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">EYストラテジー・アンド・コンサルティング</span></div>
+      <p class="firm-tagline">グローバルネットワークを活かした海外協働。One EYのカルチャー</p>
+      <div class="firm-bar" style="background:#FFE600"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約4,000人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">905万</span><span class="firm-stat-label">平均年収</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">テクノロジー、戦略、サステナビリティの3軸。ガバナンス、リスク、組織人事領域に強み。監査クライアントで構築された顧客基盤の強さ。組織を超えたコラボレーション、チームワーク・協調性を重視する社風。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">コンサルティングとしての知名度がやや低く受注ハードルが高い。人材育成・教育体制が整っていない面。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類</span><span class="sel-arr">&rarr;</span><span class="sel-step">適性検査</span><span class="sel-arr">&rarr;</span><span class="sel-step">面接2-3回</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accenture -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">アクセンチュア</span></div>
+      <p class="firm-tagline">世界最大規模のファーム。IT/デジタルの圧倒的存在感と女性活躍</p>
+      <div class="firm-bar" style="background:#A100FF"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約27,000人</span><span class="firm-stat-label">日本法人社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">865万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">33.2歳</span><span class="firm-stat-label">平均年齢</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">72%</span><span class="firm-stat-label">中途比率</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">ストラテジー&コンサルティング、テクノロジー、オペレーションズ、インダストリーX、ソングの5つの組織。DX推進、AI活用、新規事業立ち上げ、システム導入、業務改善等。デジタル・IT領域での圧倒的先進性、社員の多様性に対応する企業体力。女性社員比率50%。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">テクノロジー系スキルが必要な案件が多い。人材の質が多様で中途採用比率が高いため、マネジメントの難度が高い。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接（ケース）</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+          <p style="font-size:0.78rem;color:var(--text-caption);margin-top:4px">※ 1日選考会の開催あり</p>
+        </div>
+      </div>
+      <div class="chart-box fi">
+        <div class="chart-title">アクセンチュア日本法人の売上成長</div>
+        <div class="chart-subtitle">億円</div>
+        <div class="chart-wrap"><canvas id="chartAccenture"></canvas></div>
+      </div>
+    </div>
+
+    <!-- IBM -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">日本IBM</span></div>
+      <p class="firm-tagline">GenAI・量子コンピューティング等の先端技術に強み</p>
+      <div class="firm-bar" style="background:#0078D4"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約15,000人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">910万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">33.0歳</span><span class="firm-stat-label">平均年齢</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">戦略、デジタルビジネス、ITスペシャリストの領域。ITサービスを主軸にAI導入、量子コンピューティング、ハイブリッドクラウドなどの事業を展開。戦略から実行まで一気通貫。継続的なスキルアップとキャリア構築を重視する社風。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">最新技術を牽引するというよりは他大手の追随モデルになっている面。外資同業他社と比べて給与が低い。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">二次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BayCurrent -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">ベイカレント・コンサルティング</span></div>
+      <p class="firm-tagline">日本発メガファーム。ワンプール制で多様なPJを経験し高年収を実現</p>
+      <div class="firm-bar" style="background:var(--navy)"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約5,900人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">1,000万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">31.2歳</span><span class="firm-stat-label">平均年齢</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">コンサルタント、システムコンサルタント、プロデューサー、コーポレート企画職。業界・機能で細かく区切らず幅広い案件に触れられる「ワンプール制」を採用。若手から高収入を狙えるチャンス。DX推進、AI活用、新規事業立ち上げ等。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">体育会系の気質があり全体的に男性が多い。若手層でも営業的な動きが求められる。担当PL/CAが所属する営業部によって案件が偏りがち。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接（ケース）</span><span class="sel-arr">&rarr;</span><span class="sel-step">二次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+          <p style="font-size:0.78rem;color:var(--text-caption);margin-top:4px">※ 1日選考会の開催あり</p>
+        </div>
+        <div class="firm-full"><div class="firm-label">ランク別年収目安</div><div class="firm-val">アナリスト &rarr; コンサルタント(800万) &rarr; シニコン(1,000万) &rarr; マネージャー(1,200万)</div></div>
+      </div>
+      <div class="int-quote">
+        <p>「給与が高い。自分の担当PL/CAが所属する営業部によって案件が偏りがち。基本は企業の常駐で何でも屋さん。」</p>
+        <div class="source">&mdash; 1年前退職・24歳 ヒアリングより</div>
+      </div>
+    </div>
+
+    <!-- ABeam -->
+    <div class="firm fi">
+      <div class="firm-header"><span class="firm-name">アビームコンサルティング</span></div>
+      <p class="firm-tagline">日本発アジアNo.1を目指すグローバルファーム。SAP領域の絶対王者</p>
+      <div class="firm-bar" style="background:#E6002D"></div>
+      <div class="firm-stats">
+        <div class="firm-stat"><span class="firm-stat-num">約8,800人</span><span class="firm-stat-label">社員数</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">820万</span><span class="firm-stat-label">平均年収</span></div>
+        <div class="firm-stat"><span class="firm-stat-num">32.0歳</span><span class="firm-stat-label">平均年齢</span></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">特徴</div><div class="firm-val">戦略、ソリューション、アウトソーシングの領域。SAP導入で圧倒的な強み。日系企業のアジア進出をサポートする案件が多く、海外プロジェクト機会も豊富。公共性の高い事業への取り組み。人材を育成する文化。</div></div>
+        <div class="firm-full"><div class="firm-label">留意点</div><div class="firm-val weak">SAP以外の強みが見えにくい。同業他社と比較して給与が低い。</div></div>
+      </div>
+      <div class="firm-grid">
+        <div class="firm-full"><div class="firm-label">選考フロー</div>
+          <div class="sel-flow"><span class="sel-step">書類・Webテスト</span><span class="sel-arr">&rarr;</span><span class="sel-step">一次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">二次面接</span><span class="sel-arr">&rarr;</span><span class="sel-step">最終面接</span></div>
+        </div>
+        <div class="firm-full"><div class="firm-label">ランク別年収目安</div><div class="firm-val">アナリスト(入社時) &rarr; コンサル(入社1年後) &rarr; シニコン(入社5年後) &rarr; マネージャー(入社8年後～)</div></div>
+      </div>
+      <div class="int-quote">
+        <p>「外資ファームと比較して各タイトルへの期待値が低く、給与は9割弱の印象。人がやさしく穏やか。」</p>
+        <div class="source">&mdash; 3年前退職・31歳 ヒアリングより</div>
+      </div>
+      <div class="int-quote">
+        <p>「面倒みの良い人材が多く穏やかな雰囲気。各人の生活・キャリアをなるべく尊重して仕事をしようという感覚を共有している。キャリア形成が極力希望に沿い、全く意図しない案件ばかりという人は少ない。」</p>
+        <div class="source">&mdash; 現職・26歳 ヒアリングより</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新興勢力 -->
   <div id="tab-emerging" class="tab-content">
+    <div class="cat-summary fi">
+      <h4>新興コンサルファームの特徴</h4>
+      <p>IT/DX特化型の新興ファームが急成長中。ベンチャーならではのスピード感と柔軟性が魅力だが、PMO業務中心になるリスクも。</p>
+    </div>
+
     <div class="firm fi">
       <div class="firm-header"><span class="firm-name">North Sand</span></div>
       <p class="firm-tagline">「人柄」と「情熱」で勝負する新鋭。ITコンサルの異端児</p>
@@ -1040,6 +1468,16 @@ new Chart(document.getElementById('chartDX'),{type:'bar',data:{labels:['2021','2
 new Chart(document.getElementById('chartCAGR'),{type:'bar',data:{labels:['AI System','Robotics','Cloud','Mgmt Consulting','DX Investment','Cybersecurity','Consulting Total'],datasets:[{data:[25.6,15.0,14.6,11.42,11.7,10.3,9.5],backgroundColor:[C.blue,C.teal,C.teal,C.navy,C.teal,C.red,C.gray],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:11}}}}}});
 
 new Chart(document.getElementById('chartAccenture'),{type:'bar',data:{labels:['2014','2018','2020','2022','2024'],datasets:[{data:[1304,3200,4200,5500,7175],backgroundColor:C.acc,borderRadius:2,maxBarThickness:48}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.4,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+
+// --- 外資戦略 Charts ---
+new Chart(document.getElementById('chartStrategyHeadcount'),{type:'bar',data:{labels:['BCG','McKinsey','Bain','ATカーニー','ADL','Strategy&','RB'],datasets:[{data:[1200,800,300,300,250,200,150],backgroundColor:[C.blue,C.navy,C.teal,'#D04A02',C.deloitte,C.pwc,C.kpmg],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+
+new Chart(document.getElementById('chartStrategyOvertime'),{type:'bar',data:{labels:['BCG','Bain','ATカーニー','McKinsey','RB','ADL'],datasets:[{data:[69,71,74,75,80,116],backgroundColor:[C.blue,C.teal,'#D04A02',C.navy,C.kpmg,C.red],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'h',font:{size:11}}}}}});
+
+// --- 総合系 Charts ---
+new Chart(document.getElementById('chartSogoSalary'),{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:[C.bay,C.pwc,C.deloitte,'#0078D4',C.kpmg,'#C9B800',C.acc,C.abeam],borderRadius:2,maxBarThickness:36}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:700,ticks:{callback:v=>v+'万',font:{size:11}}}}}});
+
+new Chart(document.getElementById('chartSogoScale'),{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:[C.acc,'#0078D4',C.pwc,C.abeam,C.bay,C.deloitte,'#C9B800',C.kpmg],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v>=10000?(v/10000)+'万人':v.toLocaleString(),font:{size:11}}}}}});
 </script>
 </body>
 </html>
