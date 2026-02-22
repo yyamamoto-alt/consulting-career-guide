@@ -458,8 +458,8 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
   </div>
 
   <div class="chart-box fi">
-    <div class="chart-title">各社の月間平均残業時間</div>
-    <div class="chart-subtitle">口コミサイトベースの推定値（時間/月）</div>
+    <div class="chart-title">総合系ファーム 月間平均残業時間</div>
+    <div class="chart-subtitle">口コミサイトベース推定（時間/月）・少ない順</div>
     <div class="chart-wrap"><canvas id="chartOvertime"></canvas></div>
   </div>
 
@@ -512,7 +512,7 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 
   <div class="chart-box fi">
     <div class="chart-title">ランク別年収レンジ（BIG4平均）</div>
-    <div class="chart-subtitle">万円 / 各ランクの下限〜上限</div>
+    <div class="chart-subtitle">万円 / バーの幅が各ランクの年収レンジを示す</div>
     <div class="chart-wrap"><canvas id="chartCareerLadder"></canvas></div>
   </div>
 
@@ -633,12 +633,12 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
     <div class="two-col fi">
       <div class="chart-box" style="margin:0">
         <div class="chart-title">外資戦略 日本国内社員数</div>
-        <div class="chart-subtitle">人</div>
+        <div class="chart-subtitle">推定人数・多い順</div>
         <div class="chart-wrap"><canvas id="chartStrategyHeadcount"></canvas></div>
       </div>
       <div class="chart-box" style="margin:0">
         <div class="chart-title">外資戦略 月間平均残業時間</div>
-        <div class="chart-subtitle">時間/月（OpenWork推定）</div>
+        <div class="chart-subtitle">OpenWork推定・少ない順</div>
         <div class="chart-wrap"><canvas id="chartStrategyOvertime"></canvas></div>
       </div>
     </div>
@@ -895,12 +895,12 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
     <div class="two-col fi">
       <div class="chart-box" style="margin:0">
         <div class="chart-title">日系戦略 社員規模比較</div>
-        <div class="chart-subtitle">人</div>
+        <div class="chart-subtitle">推定人数・多い順</div>
         <div class="chart-wrap"><canvas id="chartNikkeiHeadcount"></canvas></div>
       </div>
       <div class="chart-box" style="margin:0">
         <div class="chart-title">日系戦略 平均残業時間</div>
-        <div class="chart-subtitle">h/月</div>
+        <div class="chart-subtitle">推定・少ない順</div>
         <div class="chart-wrap"><canvas id="chartNikkeiOvertime"></canvas></div>
       </div>
     </div>
@@ -931,13 +931,13 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 
     <div class="two-col fi">
       <div class="chart-box" style="margin:0">
-        <div class="chart-title">総合系ファーム 平均年収比較</div>
-        <div class="chart-subtitle">万円</div>
+        <div class="chart-title">総合系ファーム 推定平均年収</div>
+        <div class="chart-subtitle">万円・高い順</div>
         <div class="chart-wrap"><canvas id="chartSogoSalary"></canvas></div>
       </div>
       <div class="chart-box" style="margin:0">
-        <div class="chart-title">総合系ファーム 規模比較</div>
-        <div class="chart-subtitle">社員数（人）</div>
+        <div class="chart-title">総合系ファーム 日本国内社員数</div>
+        <div class="chart-subtitle">推定人数・多い順</div>
         <div class="chart-wrap"><canvas id="chartSogoScale"></canvas></div>
       </div>
     </div>
@@ -1175,8 +1175,8 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
     </div>
 
     <div class="chart-box fi">
-      <div class="chart-title">新興コンサル 売上成長推移</div>
-      <div class="chart-subtitle">億円</div>
+      <div class="chart-title">新興コンサル 売上成長（2020→2024）</div>
+      <div class="chart-subtitle">億円 / 成長倍率を併記</div>
       <div class="chart-wrap"><canvas id="chartEmergingGrowth"></canvas></div>
     </div>
   </div>
@@ -1241,7 +1241,7 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 
   <div class="chart-box fi">
     <div class="chart-title">日本のコンサルティング市場規模推移</div>
-    <div class="chart-subtitle">億円</div>
+    <div class="chart-subtitle">億円 / 8年で2.3倍に成長</div>
     <div class="chart-wrap"><canvas id="chartMarketSize"></canvas></div>
   </div>
 
@@ -1502,41 +1502,59 @@ function initCharts(){
     try{return new Chart(el,cfg);}catch(e){console.error('Chart error ['+id+']:',e);return null;}
   }
 
-  mk('chartOvertime',{type:'bar',data:{labels:['BayCurrent','Accenture','ABeam','EY','KPMG','PwC','Deloitte'],datasets:[{data:[22,30,34,42,44,51,58],backgroundColor:[C.bay,C.acc,C.abeam,'#C9B800',C.kpmg,C.pwc,C.deloitte],borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.8,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+  /* ===== 1. 総合系ファーム残業時間 → 横棒・単色・ソート済 ===== */
+  mk('chartOvertime',{type:'bar',data:{labels:['BayCurrent','Accenture','ABeam','EY','KPMG','PwC','Deloitte'],datasets:[{data:[22,30,34,42,44,51,58],backgroundColor:function(ctx){var v=ctx.raw;return v<=30?'#027B8E':v<=45?C.navy:'#C23B22'},borderRadius:2,maxBarThickness:28}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'h/月'}}}},scales:{x:{beginAtZero:true,max:70,ticks:{callback:function(v){return v+'h'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartCareerLadder',{type:'bar',data:{labels:['Analyst','Consultant','Senior Con.','Manager','Senior Mgr','Partner'],datasets:[{label:'下限',data:[550,650,850,1200,1500,2000],backgroundColor:'rgba(5,28,44,0.25)',borderColor:C.navy,borderWidth:1,borderRadius:2,maxBarThickness:40},{label:'上限',data:[650,900,1200,1700,2200,5000],backgroundColor:'rgba(34,81,255,0.2)',borderColor:C.blue,borderWidth:1,borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:2.4,scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 2. 年収レンジ → フローティングバー（範囲表示）===== */
+  mk('chartCareerLadder',{type:'bar',data:{labels:['Analyst','Consultant','Senior Con.','Manager','Senior Mgr','Partner'],datasets:[{label:'年収レンジ',data:[[550,650],[650,900],[850,1200],[1200,1700],[1500,2200],[2000,5000]],backgroundColor:'rgba(34,81,255,0.25)',borderColor:C.blue,borderWidth:1,borderRadius:2,maxBarThickness:32,borderSkipped:false}]},options:{indexAxis:'y',aspectRatio:2.0,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var d=ctx.raw;return d[0]+'〜'+d[1]+'万円'}}}},scales:{x:{min:0,max:5500,ticks:{callback:function(v){return v>=1000?(v/1000)+'千万':v+'万'},font:{size:11},stepSize:1000}},y:{ticks:{font:{size:11,weight:500}}}}}});
 
-  mk('chartAgeSalary',{type:'line',data:{labels:['22','25','28','30','33','35','38','40'],datasets:[{label:'BIG4 Fast Track',data:[580,850,1200,1500,1800,2200,2500,3000],borderColor:C.blue,backgroundColor:'rgba(34,81,255,0.06)',fill:true,tension:.3,pointRadius:3},{label:'BIG4 標準',data:[580,750,950,1100,1400,1700,2000,2200],borderColor:C.navy,tension:.3,pointRadius:3},{label:'BayCurrent',data:[600,800,1000,1200,1400,1600,2000,2200],borderColor:C.teal,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'ABeam',data:[550,650,800,1000,1200,1500,1800,2000],borderColor:C.abeam,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'NTT DATA',data:[400,500,600,700,850,1000,1100,1200],borderColor:C.gray,tension:.3,pointRadius:3,borderDash:[2,2]}]},options:{aspectRatio:2.4,plugins:{legend:{position:'bottom'}},scales:{x:{title:{display:true,text:'年齢',font:{size:11}}},y:{title:{display:true,text:'万円',font:{size:11}}}}}});
+  /* ===== 3. 年齢別年収 → ライン（良いのでほぼ維持、3系列に絞る）===== */
+  mk('chartAgeSalary',{type:'line',data:{labels:['22歳','25歳','28歳','30歳','33歳','35歳','38歳','40歳'],datasets:[{label:'BIG4 Fast Track',data:[580,850,1200,1500,1800,2200,2500,3000],borderColor:C.blue,backgroundColor:'rgba(34,81,255,0.06)',fill:true,tension:.3,pointRadius:3,borderWidth:2},{label:'BIG4 標準',data:[580,750,950,1100,1400,1700,2000,2200],borderColor:C.navy,tension:.3,pointRadius:3,borderWidth:2},{label:'総合系 標準',data:[550,650,800,1000,1200,1500,1800,2000],borderColor:C.teal,tension:.3,pointRadius:3,borderWidth:2,borderDash:[6,3]}]},options:{aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{x:{ticks:{font:{size:11}}},y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()+'万'},font:{size:11}}}}}});
 
-  mk('chartRevenue',{type:'bar',data:{labels:['Accenture','Deloitte','PwC','ABeam','BayCurrent'],datasets:[{data:[7175,3907,2642,1408,1160],backgroundColor:[C.acc,C.deloitte,C.pwc,C.abeam,C.bay],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 4. 売上高比較 → 横棒・単色ネイビー ===== */
+  mk('chartRevenue',{type:'bar',data:{labels:['Accenture','Deloitte','PwC','ABeam','BayCurrent'],datasets:[{data:[7175,3907,2642,1408,1160],backgroundColor:C.navy,borderRadius:2,maxBarThickness:28}]},options:{indexAxis:'y',aspectRatio:2.0,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw.toLocaleString()+'億円'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v>=1000?(v/1000).toFixed(1)+'千億':v+'億'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartBig4Salary',{type:'bar',data:{labels:['Deloitte','EY','KPMG','PwC'],datasets:[{data:[1422,1393,1328,1316],backgroundColor:[C.deloitte,'#C9B800',C.kpmg,C.pwc],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:1200,ticks:{font:{size:11}}}}}});
+  /* ===== 5. BIG4年収 → 横棒・単色・0始まり ===== */
+  mk('chartBig4Salary',{type:'bar',data:{labels:['Deloitte','EY','KPMG','PwC'],datasets:[{data:[1422,1393,1328,1316],backgroundColor:C.navy,borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:1.4,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'万円'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'万'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartGrowth',{type:'bar',data:{labels:['BayCurrent','PwC','KPMG','Deloitte','EY'],datasets:[{data:[24,5.7,4,-4,-4],backgroundColor:['#027B8E','#027B8E','#027B8E','#C23B22','#C23B22'],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v+'%'},font:{size:11}}}}}});
+  /* ===== 6. 社員数増減率 → 横棒・正負で色分け（良いのでほぼ維持）===== */
+  mk('chartGrowth',{type:'bar',data:{labels:['BayCurrent +24%','PwC +5.7%','KPMG +4%','Deloitte -4%','EY -4%'],datasets:[{data:[24,5.7,4,-4,-4],backgroundColor:function(ctx){return ctx.raw>=0?C.teal:C.red},borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v+'%'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartMarketSize',{type:'bar',data:{labels:['2017','2018','2019','2020','2021','2022','2023','2024(est)'],datasets:[{data:[9644,10800,12100,11900,15761,18281,20023,21800],backgroundColor:C.navy,borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 7. 市場規模推移 → エリアチャート（時系列）===== */
+  mk('chartMarketSize',{type:'line',data:{labels:['2017','2018','2019','2020','2021','2022','2023','2024(est)'],datasets:[{data:[9644,10800,12100,11900,15761,18281,20023,21800],borderColor:C.navy,backgroundColor:'rgba(5,28,44,0.08)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:C.navy,borderWidth:2}]},options:{aspectRatio:2.4,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw.toLocaleString()+'億円'}}}},scales:{x:{ticks:{font:{size:11}}},y:{beginAtZero:true,ticks:{callback:function(v){return(v/10000).toFixed(1)+'兆'},font:{size:11}}}}}});
 
-  mk('chartForecast',{type:'line',data:{labels:['2023','2025','2027','2030'],datasets:[{label:'Positive',data:[20023,23500,26000,27600],borderColor:C.teal,backgroundColor:'rgba(2,123,142,0.06)',fill:true,tension:.3,pointRadius:3},{label:'Standard',data:[20023,22500,24000,25000],borderColor:C.navy,tension:.3,pointRadius:3},{label:'Negative',data:[20023,21500,22800,23400],borderColor:C.red,borderDash:[4,4],tension:.3,pointRadius:3}]},options:{aspectRatio:1.6,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:function(v){return(v/1000).toFixed(0)+'千億'},font:{size:11}}}}}});
+  /* ===== 8. 将来予測 → ライン+エリア（良いのでほぼ維持）===== */
+  mk('chartForecast',{type:'line',data:{labels:['2023','2025','2027','2030'],datasets:[{label:'楽観',data:[20023,23500,26000,27600],borderColor:C.teal,backgroundColor:'rgba(2,123,142,0.06)',fill:true,tension:.3,pointRadius:4,borderWidth:2},{label:'標準',data:[20023,22500,24000,25000],borderColor:C.navy,tension:.3,pointRadius:4,borderWidth:2},{label:'悲観',data:[20023,21500,22800,23400],borderColor:C.red,borderDash:[4,4],tension:.3,pointRadius:4,borderWidth:2}]},options:{aspectRatio:1.6,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{x:{ticks:{font:{size:11}}},y:{ticks:{callback:function(v){return(v/10000).toFixed(1)+'兆'},font:{size:11}}}}}});
 
-  mk('chartDX',{type:'bar',data:{labels:['2021','2022','2023','2024(est)','2025(est)','2027(est)'],datasets:[{data:[45000,52000,65069,72000,80000,97698],backgroundColor:C.teal,borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return(v/10000).toFixed(1)+'兆'},font:{size:11}}}}}});
+  /* ===== 9. DX投資 → エリアチャート（時系列）===== */
+  mk('chartDX',{type:'line',data:{labels:['2021','2022','2023','2024(est)','2025(est)','2027(est)'],datasets:[{data:[45000,52000,65069,72000,80000,97698],borderColor:C.teal,backgroundColor:'rgba(2,123,142,0.08)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:C.teal,borderWidth:2}]},options:{aspectRatio:1.6,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return(ctx.raw/10000).toFixed(1)+'兆円'}}}},scales:{x:{ticks:{font:{size:11}}},y:{beginAtZero:true,ticks:{callback:function(v){return(v/10000).toFixed(1)+'兆'},font:{size:11}}}}}});
 
-  mk('chartCAGR',{type:'bar',data:{labels:['AI System','Robotics','Cloud','Mgmt Consulting','DX Investment','Cybersecurity','Consulting Total'],datasets:[{data:[25.6,15.0,14.6,11.42,11.7,10.3,9.5],backgroundColor:[C.blue,C.teal,C.teal,C.navy,C.teal,C.red,C.gray],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v+'%'},font:{size:11}}}}}});
+  /* ===== 10. CAGR比較 → 横棒・値でグラデーション ===== */
+  mk('chartCAGR',{type:'bar',data:{labels:['AI System','Robotics','Cloud','DX Investment','Mgmt Consulting','Cybersecurity','Consulting Total'],datasets:[{data:[25.6,15.0,14.6,11.7,11.42,10.3,9.5],backgroundColor:function(ctx){var v=ctx.raw;return v>=20?C.blue:v>=12?C.teal:C.navy},borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return 'CAGR '+ctx.raw+'%'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartAccenture',{type:'bar',data:{labels:['2014','2018','2020','2022','2024'],datasets:[{data:[1304,3200,4200,5500,7175],backgroundColor:C.acc,borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.4,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 11. アクセンチュア成長 → エリアチャート ===== */
+  mk('chartAccenture',{type:'line',data:{labels:['2014','2018','2020','2022','2024'],datasets:[{data:[1304,3200,4200,5500,7175],borderColor:C.acc,backgroundColor:'rgba(161,0,255,0.08)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:C.acc,borderWidth:2}]},options:{aspectRatio:2.2,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw.toLocaleString()+'億円'}}}},scales:{x:{ticks:{font:{size:11}}},y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
 
-  mk('chartStrategyHeadcount',{type:'bar',data:{labels:['BCG','McKinsey','Bain','ATカーニー','ADL','Strategy&','RB'],datasets:[{data:[1200,800,300,300,250,200,150],backgroundColor:[C.blue,C.navy,C.teal,'#D04A02',C.deloitte,C.pwc,C.kpmg],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+  /* ===== 12. 外資戦略 社員数 → 横棒・単色 ===== */
+  mk('chartStrategyHeadcount',{type:'bar',data:{labels:['BCG','McKinsey','Bain','ATカーニー','ADL','Strategy&','RB'],datasets:[{data:[1200,800,300,300,250,200,150],backgroundColor:C.navy,borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '約'+ctx.raw+'名'}}}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartStrategyOvertime',{type:'bar',data:{labels:['BCG','Bain','ATカーニー','McKinsey','RB','ADL'],datasets:[{data:[69,71,74,75,80,116],backgroundColor:[C.blue,C.teal,'#D04A02',C.navy,C.kpmg,C.red],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v+'h'},font:{size:11}}}}}});
+  /* ===== 13. 外資戦略 残業 → 横棒・値で色分け ===== */
+  mk('chartStrategyOvertime',{type:'bar',data:{labels:['BCG','Bain','ATカーニー','McKinsey','RB','ADL'],datasets:[{data:[69,71,74,75,80,116],backgroundColor:function(ctx){var v=ctx.raw;return v<=72?C.teal:v<=80?C.navy:C.red},borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'h/月'}}}},scales:{x:{beginAtZero:true,max:130,ticks:{callback:function(v){return v+'h'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartSogoSalary',{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:[C.bay,C.pwc,C.deloitte,'#0078D4',C.kpmg,'#C9B800',C.acc,C.abeam],borderRadius:2,maxBarThickness:36}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:700,ticks:{callback:function(v){return v+'万'},font:{size:11}}}}}});
+  /* ===== 14. 総合系 年収 → 横棒・単色 ===== */
+  mk('chartSogoSalary',{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:C.navy,borderRadius:2,maxBarThickness:22}]},options:{indexAxis:'y',aspectRatio:1.8,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'万円'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'万'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartSogoScale',{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:[C.acc,'#0078D4',C.pwc,C.abeam,C.bay,C.deloitte,'#C9B800',C.kpmg],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v>=10000?(v/10000)+'万人':v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 15. 総合系 社員数 → 横棒・単色 ===== */
+  mk('chartSogoScale',{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:C.teal,borderRadius:2,maxBarThickness:22}]},options:{indexAxis:'y',aspectRatio:1.8,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw.toLocaleString()+'名'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v>=10000?(v/10000)+'万':v.toLocaleString()},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartNikkeiHeadcount',{type:'bar',data:{labels:['フロンティア','IGPI','DI','YCP','CDI','P&E','FM'],datasets:[{data:[427,220,214,100,80,60,50],backgroundColor:[C.red,C.navy,C.navy,C.teal,C.blue,C.blue,C.teal],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+  /* ===== 16. 日系戦略 社員数 → 横棒・単色 ===== */
+  mk('chartNikkeiHeadcount',{type:'bar',data:{labels:['フロンティア','IGPI','DI','YCP','CDI','P&E','FM'],datasets:[{data:[427,220,214,100,80,60,50],backgroundColor:C.navy,borderRadius:2,maxBarThickness:22}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '約'+ctx.raw+'名'}}}},scales:{x:{beginAtZero:true,ticks:{font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartNikkeiOvertime',{type:'bar',data:{labels:['P&E','DI','フロンティア','YCP','CDI','IGPI','FM'],datasets:[{data:[50,60,60,65,70,70,70],backgroundColor:[C.teal,C.blue,C.blue,C.navy,C.navy,C.navy,C.red],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v+'h'},font:{size:11}}}}}});
+  /* ===== 17. 日系戦略 残業 → 横棒・値で色分け ===== */
+  mk('chartNikkeiOvertime',{type:'bar',data:{labels:['P&E','DI','フロンティア','YCP','CDI','IGPI','FM'],datasets:[{data:[50,60,60,65,70,70,70],backgroundColor:function(ctx){var v=ctx.raw;return v<=55?C.teal:v<=65?C.navy:C.red},borderRadius:2,maxBarThickness:22}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'h/月'}}}},scales:{x:{beginAtZero:true,max:80,ticks:{callback:function(v){return v+'h'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
-  mk('chartEmergingGrowth',{type:'bar',data:{labels:['ベイカレント','Dirbato','ライズ','North Sand','ビジョン'],datasets:[{label:'2020',data:[328,15,12,8,5],backgroundColor:'rgba(5,28,44,0.3)',borderRadius:2,maxBarThickness:32},{label:'2024',data:[1160,120,85,60,40],backgroundColor:C.navy,borderRadius:2,maxBarThickness:32}]},options:{aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+  /* ===== 18. 新興勢力 → 成長倍率表示（横棒・2024実績）===== */
+  mk('chartEmergingGrowth',{type:'bar',data:{labels:['Dirbato (8.0x)','ライズ (7.1x)','North Sand (7.5x)','ビジョン (8.0x)','ベイカレント (3.5x)'],datasets:[{label:'2024売上',data:[120,85,60,40,1160],backgroundColor:function(ctx){return ctx.dataIndex<4?C.teal:C.navy},borderRadius:2,maxBarThickness:24}]},options:{indexAxis:'y',aspectRatio:2.0,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+'億円（2020年比）'}}}},scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'億'},font:{size:11}}},y:{ticks:{font:{size:11}}}}}});
 
   /* Trigger resize for any charts that were in hidden containers */
   setTimeout(function(){window.dispatchEvent(new Event('resize'))},200);
