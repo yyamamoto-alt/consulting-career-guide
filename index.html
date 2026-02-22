@@ -6,7 +6,6 @@
 <title>総合コンサル転職 完全ガイド 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 :root {
   --navy: #051C2C;
@@ -1443,69 +1442,109 @@ footer p{font-size:0.8rem;opacity:0.5;line-height:1.9;max-width:560px}
 </footer>
 
 <!-- ====== SCRIPTS ====== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
+/* --- Tab switching --- */
 function showTab(t,ev){
-  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(function(e){e.classList.remove('active')});
+  document.querySelectorAll('.tab-btn').forEach(function(e){e.classList.remove('active')});
   document.getElementById('tab-'+t).classList.add('active');
-  (ev||event).target.classList.add('active');
-  setTimeout(()=>window.dispatchEvent(new Event('resize')),50);
+  if(ev&&ev.target)ev.target.classList.add('active');
+  else if(typeof event!=='undefined'&&event.target)event.target.classList.add('active');
+  setTimeout(function(){window.dispatchEvent(new Event('resize'))},80);
 }
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:0.08});
-document.querySelectorAll('.fi').forEach(e=>obs.observe(e));
-const secs=document.querySelectorAll('section[id]');
-window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});document.querySelectorAll('.nav-link').forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+c)})});
 
-// Chart config
-const C={navy:'#051C2C',blue:'#2251FF',teal:'#027B8E',gray:'#999',lgray:'#E0DDD8',red:'#C23B22',
-  deloitte:'#86BC25',pwc:'#D04A02',ey:'#FFE600',kpmg:'#00338D',acc:'#A100FF',bay:'#051C2C',abeam:'#E6002D'};
-Chart.defaults.font.family="'Noto Sans JP',sans-serif";
-Chart.defaults.font.size=12;
-Chart.defaults.font.weight=300;
-Chart.defaults.plugins.legend.labels.usePointStyle=true;
-Chart.defaults.plugins.legend.labels.padding=20;
-Chart.defaults.scale.grid={color:'#F0EDE8'};
-Chart.defaults.scale.border={color:'#E0DDD8'};
+/* --- Scroll animations --- */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')});
+},{threshold:0.08});
+document.querySelectorAll('.fi').forEach(function(e){obs.observe(e)});
 
-new Chart(document.getElementById('chartOvertime'),{type:'bar',data:{labels:['BayCurrent','Accenture','ABeam','EY','KPMG','PwC','Deloitte'],datasets:[{data:[22,30,34,42,44,51,58],backgroundColor:[C.bay,C.acc,C.abeam,'#C9B800',C.kpmg,C.pwc,C.deloitte],borderRadius:2,maxBarThickness:48}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.8,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+var secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){
+  var c='';
+  secs.forEach(function(s){if(window.scrollY>=s.offsetTop-120)c=s.id});
+  document.querySelectorAll('.nav-link').forEach(function(l){
+    l.classList.toggle('active',l.getAttribute('href')==='#'+c);
+  });
+});
 
-new Chart(document.getElementById('chartCareerLadder'),{type:'bar',data:{labels:['Analyst','Consultant','Senior Consultant','Manager','Senior Manager','Partner'],datasets:[{label:'下限',data:[550,650,850,1200,1500,2000],backgroundColor:'rgba(5,28,44,0.25)',borderColor:C.navy,borderWidth:1,borderRadius:2,maxBarThickness:40},{label:'上限',data:[650,900,1200,1700,2200,5000],backgroundColor:'rgba(34,81,255,0.2)',borderColor:C.blue,borderWidth:1,borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.4,scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+/* --- Charts --- */
+function initCharts(){
+  if(typeof Chart==='undefined'){console.error('Chart.js not loaded');return;}
 
-new Chart(document.getElementById('chartAgeSalary'),{type:'line',data:{labels:['22','25','28','30','33','35','38','40'],datasets:[{label:'BIG4 Fast Track',data:[580,850,1200,1500,1800,2200,2500,3000],borderColor:C.blue,backgroundColor:'rgba(34,81,255,0.06)',fill:true,tension:.3,pointRadius:3},{label:'BIG4 標準',data:[580,750,950,1100,1400,1700,2000,2200],borderColor:C.navy,tension:.3,pointRadius:3},{label:'BayCurrent',data:[600,800,1000,1200,1400,1600,2000,2200],borderColor:C.teal,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'ABeam',data:[550,650,800,1000,1200,1500,1800,2000],borderColor:C.abeam,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'NTT DATA',data:[400,500,600,700,850,1000,1100,1200],borderColor:C.gray,tension:.3,pointRadius:3,borderDash:[2,2]}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.4,plugins:{legend:{position:'bottom'}},scales:{x:{title:{display:true,text:'年齢',font:{size:11}}},y:{title:{display:true,text:'万円',font:{size:11}}}}}});
+  var C={navy:'#051C2C',blue:'#2251FF',teal:'#027B8E',gray:'#999',lgray:'#E0DDD8',red:'#C23B22',
+    deloitte:'#86BC25',pwc:'#D04A02',ey:'#FFE600',kpmg:'#00338D',acc:'#A100FF',bay:'#051C2C',abeam:'#E6002D'};
 
-new Chart(document.getElementById('chartRevenue'),{type:'bar',data:{labels:['Accenture','Deloitte','PwC','ABeam','BayCurrent'],datasets:[{data:[7175,3907,2642,1408,1160],backgroundColor:[C.acc,C.deloitte,C.pwc,C.abeam,C.bay],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+  Chart.defaults.font.family="'Noto Sans JP',sans-serif";
+  Chart.defaults.font.size=12;
+  Chart.defaults.font.weight=300;
+  Chart.defaults.plugins.legend.labels.usePointStyle=true;
+  Chart.defaults.plugins.legend.labels.padding=20;
 
-new Chart(document.getElementById('chartBig4Salary'),{type:'bar',data:{labels:['Deloitte','EY','KPMG','PwC'],datasets:[{data:[1422,1393,1328,1316],backgroundColor:[C.deloitte,'#C9B800',C.kpmg,C.pwc],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:1200,ticks:{font:{size:11}}}}}});
+  var gridCfg={color:'#F0EDE8'};
+  var borderCfg={color:'#E0DDD8'};
 
-new Chart(document.getElementById('chartGrowth'),{type:'bar',data:{labels:['BayCurrent','PwC','KPMG','Deloitte','EY'],datasets:[{data:[24,5.7,4,-4,-4],backgroundColor:['#027B8E','#027B8E','#027B8E','#C23B22','#C23B22'],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:11}}}}}});
+  function mk(id,cfg){
+    var el=document.getElementById(id);
+    if(!el){console.warn('Canvas not found:',id);return null;}
+    if(!cfg.options)cfg.options={};
+    if(!cfg.options.scales)cfg.options.scales={};
+    var scales=cfg.options.scales;
+    var axes=cfg.options.indexAxis==='y'?['x','y']:['y','x'];
+    axes.forEach(function(a){
+      if(!scales[a])scales[a]={};
+      if(!scales[a].grid)scales[a].grid=gridCfg;
+      if(!scales[a].border)scales[a].border=borderCfg;
+    });
+    cfg.options.responsive=true;
+    cfg.options.maintainAspectRatio=true;
+    try{return new Chart(el,cfg);}catch(e){console.error('Chart error ['+id+']:',e);return null;}
+  }
 
-new Chart(document.getElementById('chartMarketSize'),{type:'bar',data:{labels:['2017','2018','2019','2020','2021','2022','2023','2024(est)'],datasets:[{data:[9644,10800,12100,11900,15761,18281,20023,21800],backgroundColor:C.navy,borderRadius:2,maxBarThickness:48}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+  mk('chartOvertime',{type:'bar',data:{labels:['BayCurrent','Accenture','ABeam','EY','KPMG','PwC','Deloitte'],datasets:[{data:[22,30,34,42,44,51,58],backgroundColor:[C.bay,C.acc,C.abeam,'#C9B800',C.kpmg,C.pwc,C.deloitte],borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.8,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartForecast'),{type:'line',data:{labels:['2023','2025','2027','2030'],datasets:[{label:'Positive',data:[20023,23500,26000,27600],borderColor:C.teal,backgroundColor:'rgba(2,123,142,0.06)',fill:true,tension:.3,pointRadius:3},{label:'Standard',data:[20023,22500,24000,25000],borderColor:C.navy,tension:.3,pointRadius:3},{label:'Negative',data:[20023,21500,22800,23400],borderColor:C.red,borderDash:[4,4],tension:.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>(v/1000).toFixed(0)+'千億',font:{size:11}}}}}});
+  mk('chartCareerLadder',{type:'bar',data:{labels:['Analyst','Consultant','Senior Con.','Manager','Senior Mgr','Partner'],datasets:[{label:'下限',data:[550,650,850,1200,1500,2000],backgroundColor:'rgba(5,28,44,0.25)',borderColor:C.navy,borderWidth:1,borderRadius:2,maxBarThickness:40},{label:'上限',data:[650,900,1200,1700,2200,5000],backgroundColor:'rgba(34,81,255,0.2)',borderColor:C.blue,borderWidth:1,borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:2.4,scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartDX'),{type:'bar',data:{labels:['2021','2022','2023','2024(est)','2025(est)','2027(est)'],datasets:[{data:[45000,52000,65069,72000,80000,97698],backgroundColor:C.teal,borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>(v/10000).toFixed(1)+'兆',font:{size:11}}}}}});
+  mk('chartAgeSalary',{type:'line',data:{labels:['22','25','28','30','33','35','38','40'],datasets:[{label:'BIG4 Fast Track',data:[580,850,1200,1500,1800,2200,2500,3000],borderColor:C.blue,backgroundColor:'rgba(34,81,255,0.06)',fill:true,tension:.3,pointRadius:3},{label:'BIG4 標準',data:[580,750,950,1100,1400,1700,2000,2200],borderColor:C.navy,tension:.3,pointRadius:3},{label:'BayCurrent',data:[600,800,1000,1200,1400,1600,2000,2200],borderColor:C.teal,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'ABeam',data:[550,650,800,1000,1200,1500,1800,2000],borderColor:C.abeam,tension:.3,pointRadius:3,borderDash:[6,3]},{label:'NTT DATA',data:[400,500,600,700,850,1000,1100,1200],borderColor:C.gray,tension:.3,pointRadius:3,borderDash:[2,2]}]},options:{aspectRatio:2.4,plugins:{legend:{position:'bottom'}},scales:{x:{title:{display:true,text:'年齢',font:{size:11}}},y:{title:{display:true,text:'万円',font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartCAGR'),{type:'bar',data:{labels:['AI System','Robotics','Cloud','Mgmt Consulting','DX Investment','Cybersecurity','Consulting Total'],datasets:[{data:[25.6,15.0,14.6,11.42,11.7,10.3,9.5],backgroundColor:[C.blue,C.teal,C.teal,C.navy,C.teal,C.red,C.gray],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%',font:{size:11}}}}}});
+  mk('chartRevenue',{type:'bar',data:{labels:['Accenture','Deloitte','PwC','ABeam','BayCurrent'],datasets:[{data:[7175,3907,2642,1408,1160],backgroundColor:[C.acc,C.deloitte,C.pwc,C.abeam,C.bay],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartAccenture'),{type:'bar',data:{labels:['2014','2018','2020','2022','2024'],datasets:[{data:[1304,3200,4200,5500,7175],backgroundColor:C.acc,borderRadius:2,maxBarThickness:48}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.4,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+  mk('chartBig4Salary',{type:'bar',data:{labels:['Deloitte','EY','KPMG','PwC'],datasets:[{data:[1422,1393,1328,1316],backgroundColor:[C.deloitte,'#C9B800',C.kpmg,C.pwc],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:1200,ticks:{font:{size:11}}}}}});
 
-// --- 外資戦略 Charts ---
-new Chart(document.getElementById('chartStrategyHeadcount'),{type:'bar',data:{labels:['BCG','McKinsey','Bain','ATカーニー','ADL','Strategy&','RB'],datasets:[{data:[1200,800,300,300,250,200,150],backgroundColor:[C.blue,C.navy,C.teal,'#D04A02',C.deloitte,C.pwc,C.kpmg],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+  mk('chartGrowth',{type:'bar',data:{labels:['BayCurrent','PwC','KPMG','Deloitte','EY'],datasets:[{data:[24,5.7,4,-4,-4],backgroundColor:['#027B8E','#027B8E','#027B8E','#C23B22','#C23B22'],borderRadius:2,maxBarThickness:40}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v+'%'},font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartStrategyOvertime'),{type:'bar',data:{labels:['BCG','Bain','ATカーニー','McKinsey','RB','ADL'],datasets:[{data:[69,71,74,75,80,116],backgroundColor:[C.blue,C.teal,'#D04A02',C.navy,C.kpmg,C.red],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'h',font:{size:11}}}}}});
+  mk('chartMarketSize',{type:'bar',data:{labels:['2017','2018','2019','2020','2021','2022','2023','2024(est)'],datasets:[{data:[9644,10800,12100,11900,15761,18281,20023,21800],backgroundColor:C.navy,borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
 
-// --- 総合系 Charts ---
-new Chart(document.getElementById('chartSogoSalary'),{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:[C.bay,C.pwc,C.deloitte,'#0078D4',C.kpmg,'#C9B800',C.acc,C.abeam],borderRadius:2,maxBarThickness:36}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:700,ticks:{callback:v=>v+'万',font:{size:11}}}}}});
+  mk('chartForecast',{type:'line',data:{labels:['2023','2025','2027','2030'],datasets:[{label:'Positive',data:[20023,23500,26000,27600],borderColor:C.teal,backgroundColor:'rgba(2,123,142,0.06)',fill:true,tension:.3,pointRadius:3},{label:'Standard',data:[20023,22500,24000,25000],borderColor:C.navy,tension:.3,pointRadius:3},{label:'Negative',data:[20023,21500,22800,23400],borderColor:C.red,borderDash:[4,4],tension:.3,pointRadius:3}]},options:{aspectRatio:1.6,plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:function(v){return(v/1000).toFixed(0)+'千億'},font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartSogoScale'),{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:[C.acc,'#0078D4',C.pwc,C.abeam,C.bay,C.deloitte,'#C9B800',C.kpmg],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v>=10000?(v/10000)+'万人':v.toLocaleString(),font:{size:11}}}}}});
+  mk('chartDX',{type:'bar',data:{labels:['2021','2022','2023','2024(est)','2025(est)','2027(est)'],datasets:[{data:[45000,52000,65069,72000,80000,97698],backgroundColor:C.teal,borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return(v/10000).toFixed(1)+'兆'},font:{size:11}}}}}});
 
-// --- 日系戦略 Charts ---
-new Chart(document.getElementById('chartNikkeiHeadcount'),{type:'bar',data:{labels:['フロンティア','IGPI','DI','YCP','CDI','P&E','FM'],datasets:[{data:[427,220,214,100,80,60,50],backgroundColor:[C.red,C.navy,C.navy,C.teal,C.blue,C.blue,C.teal],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+  mk('chartCAGR',{type:'bar',data:{labels:['AI System','Robotics','Cloud','Mgmt Consulting','DX Investment','Cybersecurity','Consulting Total'],datasets:[{data:[25.6,15.0,14.6,11.42,11.7,10.3,9.5],backgroundColor:[C.blue,C.teal,C.teal,C.navy,C.teal,C.red,C.gray],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',aspectRatio:2.2,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v+'%'},font:{size:11}}}}}});
 
-new Chart(document.getElementById('chartNikkeiOvertime'),{type:'bar',data:{labels:['P&E','DI','フロンティア','YCP','CDI','IGPI','FM'],datasets:[{data:[50,60,60,65,70,70,70],backgroundColor:[C.teal,C.blue,C.blue,C.navy,C.navy,C.navy,C.red],borderRadius:2,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'h',font:{size:11}}}}}});
+  mk('chartAccenture',{type:'bar',data:{labels:['2014','2018','2020','2022','2024'],datasets:[{data:[1304,3200,4200,5500,7175],backgroundColor:C.acc,borderRadius:2,maxBarThickness:48}]},options:{aspectRatio:2.4,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
 
-// --- 新興勢力 Chart ---
-new Chart(document.getElementById('chartEmergingGrowth'),{type:'bar',data:{labels:['ベイカレント','Dirbato','ライズ','North Sand','ビジョン'],datasets:[{label:'2020',data:[328,15,12,8,5],backgroundColor:'rgba(5,28,44,0.3)',borderRadius:2,maxBarThickness:32},{label:'2024',data:[1160,120,85,60,40],backgroundColor:C.navy,borderRadius:2,maxBarThickness:32}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString(),font:{size:11}}}}}});
+  mk('chartStrategyHeadcount',{type:'bar',data:{labels:['BCG','McKinsey','Bain','ATカーニー','ADL','Strategy&','RB'],datasets:[{data:[1200,800,300,300,250,200,150],backgroundColor:[C.blue,C.navy,C.teal,'#D04A02',C.deloitte,C.pwc,C.kpmg],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+
+  mk('chartStrategyOvertime',{type:'bar',data:{labels:['BCG','Bain','ATカーニー','McKinsey','RB','ADL'],datasets:[{data:[69,71,74,75,80,116],backgroundColor:[C.blue,C.teal,'#D04A02',C.navy,C.kpmg,C.red],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v+'h'},font:{size:11}}}}}});
+
+  mk('chartSogoSalary',{type:'bar',data:{labels:['ベイカレント','PwC','デロイト','IBM','KPMG','EY','Accenture','ABeam'],datasets:[{data:[1000,980,950,910,910,905,865,820],backgroundColor:[C.bay,C.pwc,C.deloitte,'#0078D4',C.kpmg,'#C9B800',C.acc,C.abeam],borderRadius:2,maxBarThickness:36}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{min:700,ticks:{callback:function(v){return v+'万'},font:{size:11}}}}}});
+
+  mk('chartSogoScale',{type:'bar',data:{labels:['Accenture','IBM','PwC','ABeam','ベイカレント','デロイト','EY','KPMG'],datasets:[{data:[27000,15000,10000,8800,5900,5500,4000,2000],backgroundColor:[C.acc,'#0078D4',C.pwc,C.abeam,C.bay,C.deloitte,'#C9B800',C.kpmg],borderRadius:2,maxBarThickness:36}]},options:{indexAxis:'y',aspectRatio:1.6,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return v>=10000?(v/10000)+'万人':v.toLocaleString()},font:{size:11}}}}}});
+
+  mk('chartNikkeiHeadcount',{type:'bar',data:{labels:['フロンティア','IGPI','DI','YCP','CDI','P&E','FM'],datasets:[{data:[427,220,214,100,80,60,50],backgroundColor:[C.red,C.navy,C.navy,C.teal,C.blue,C.blue,C.teal],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+
+  mk('chartNikkeiOvertime',{type:'bar',data:{labels:['P&E','DI','フロンティア','YCP','CDI','IGPI','FM'],datasets:[{data:[50,60,60,65,70,70,70],backgroundColor:[C.teal,C.blue,C.blue,C.navy,C.navy,C.navy,C.red],borderRadius:2,maxBarThickness:40}]},options:{aspectRatio:1.6,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v+'h'},font:{size:11}}}}}});
+
+  mk('chartEmergingGrowth',{type:'bar',data:{labels:['ベイカレント','Dirbato','ライズ','North Sand','ビジョン'],datasets:[{label:'2020',data:[328,15,12,8,5],backgroundColor:'rgba(5,28,44,0.3)',borderRadius:2,maxBarThickness:32},{label:'2024',data:[1160,120,85,60,40],backgroundColor:C.navy,borderRadius:2,maxBarThickness:32}]},options:{aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return v.toLocaleString()},font:{size:11}}}}}});
+
+  /* Trigger resize for any charts that were in hidden containers */
+  setTimeout(function(){window.dispatchEvent(new Event('resize'))},200);
+}
+
+/* Run after page fully loads (DOM + CSS + external scripts) */
+if(document.readyState==='complete'){initCharts();}
+else{window.addEventListener('load',initCharts);}
 </script>
 </body>
 </html>
